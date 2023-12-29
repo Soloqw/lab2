@@ -1,0 +1,20 @@
+products = input("Введите список товаров через запятую: ").split(',')
+prices = {}
+for product in products:
+    prices[product] = {}
+    for shop in range(1, 4):
+        prices[product][f'магазин{shop}'] = float(input(f"Введите цену товара {product} в магазине {shop}: "))
+
+
+total_prices = {}
+for shop in range(1, 4):
+    total_prices[f'магазин{shop}'] = sum(prices[product][f'магазин{shop}'] for product in products)
+
+
+print("Общая стоимость покупок:")
+for shop, total_price in total_prices.items():
+    print(f"{shop}: {total_price} руб.")
+
+
+max_savings_shop = min(total_prices, key=total_prices.get)
+print(f"Больше всего денег можно сэкономить в {max_savings_shop}.")
